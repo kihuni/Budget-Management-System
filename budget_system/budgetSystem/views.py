@@ -45,6 +45,9 @@ def user_register(request):
 def dashboard(request):
     return render(request, 'budgetSystem/dashboard.html')
 
+def register(request):
+    return render(request, 'budgetSystem/register.html')
+
 class BudgetListView(LoginRequiredMixin,ListView):
     model = Budget
     template_name = 'budgetSystem/budget_list.html'
