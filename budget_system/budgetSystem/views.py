@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,logout, authenticate
+from django.contrib.auth.decorators import login_required
+
 from .models import *
 
 # Create your views here.
@@ -36,6 +38,9 @@ def user_register(request):
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
+@login_required
+def dashboard(request):
+    return render(request, 'budgetSystem/dashboard.html')
 
 class BudgetListView(ListView):
     model = Budget
