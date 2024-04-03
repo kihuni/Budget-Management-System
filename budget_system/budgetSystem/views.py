@@ -3,7 +3,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import BudgetForm
+from .forms import BudgetForm, CustomUserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Budget
 
 from .models import *
@@ -19,7 +20,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('dashboard')  # Redirect to dashboard or any desired page after login
+                return redirect('dashboard')  
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
@@ -27,28 +28,31 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('login')  # Redirect to login page after logout
+    return redirect('login')  
 
 
 def user_register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirect to login page after successful registration
+            return redirect('login')  
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
 @login_required
 def dashboard(request):
     return render(request, 'budgetSystem/dashboard.html')
 
-class BudgetListView(ListView):
+class BudgetListView(LoginRequiredMixin,ListView):
     model = Budget
     template_name = 'budgetSystem/budget_list.html'
     context_object_name = 'budgets'
     ordering = ['-start_date']
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
