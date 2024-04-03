@@ -13,5 +13,13 @@
             <li>No budgets found</li>
         {% endfor %}
     </ul>
+
+    <h2>Add New Budget</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ budget_form.as_p }}
+        <button type="submit">Add Budget</button>
+    </form>
 </body>
 </html>
+

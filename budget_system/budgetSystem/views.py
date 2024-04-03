@@ -3,6 +3,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,logout, authenticate
 from django.contrib.auth.decorators import login_required
+from .forms import BudgetForm
+from .models import Budget
 
 from .models import *
 
@@ -47,3 +49,18 @@ class BudgetListView(ListView):
     template_name = 'budgetSystem/budget_list.html'
     context_object_name = 'budgets'
     ordering = ['-start_date']
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['budget_form'] = BudgetForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        budget_form = BudgetForm(request.POST)
+        if budget_form.is_valid():
+            budget = budget_form.save(commit=False)
+            budget.user = request.user
+            budget_form.save()
+            return redirect('budgets_list')
+        else:
+            return render(request, self.template_name, {'budgets': self.get_queryset(), 'budget_form': budget_form})
