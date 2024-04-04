@@ -13,6 +13,22 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name']
+        
+class ExpenseForm(forms.ModelForm):
+    class Meta:
+        model = Expense
+        fields = ['title', 'amount', 'category', 'budget', 'date', 'location', 'notes']
+        
+class IncomeForm(forms.ModelForm):
+    class Meta:
+        model = Income
+        fields = ['amount', 'date', 'source', 'notes']
+        
+class TransferForm(forms.ModelForm):
+    class Meta:
+        model = Transfer
+        fields = ['amount', 'date', 'from_budget', 'to_budget', 'notes']
+
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)

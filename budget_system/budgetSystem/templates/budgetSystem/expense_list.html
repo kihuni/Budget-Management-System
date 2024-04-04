@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses</title>
+</head>
+<body>
+    <h1>Expenses list</h1>
+    <ul>
+        {% for expense in expenses %}
+            <li>{{ expense.name }} - {{ expense.amount }} - {{ expense.date }}</li>
+        {% empty %}
+            <li>No expenses found</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add New Expense</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ expense_form.as_p }}
+        <button type="submit">Add Expense</button>
+</body>
+</html>

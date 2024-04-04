@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer</title>
+
+    <h1>transfer list</h1>
+    <ul>
+        {% for transfer in transfers %}
+            <li>{{ transfer.name }} - {{ transfer.amount }} - {{ transfer.date }}</li>
+        {% empty %}
+            <li>No transfers found</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add New Transfer</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ transfer_form.as_p }}
+        <button type="submit">Add Transfer</button>
+</head>
+<body>
+    
+</body>
+</html>

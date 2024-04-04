@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income</title>
+</head>
+<body>
+    <h1>Income list</h1>
+    <ul>
+        {% for income in incomes %}
+            <li>{{ income.name }} - {{ income.amount }} - {{ income.date }}</li>
+        {% empty %}
+            <li>No incomes found</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add New Income</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ income_form.as_p }}
+        <button type="submit">Add Income</button>
+</body>
+</html>
