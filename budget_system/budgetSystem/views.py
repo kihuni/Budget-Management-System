@@ -3,9 +3,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import BudgetForm, CustomUserCreationForm
+from .forms import BudgetForm, CustomUserCreationForm, CategoryForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Budget
+from .models import Budget,Category,Expense,Income,Transfer
 
 from .models import *
 
@@ -23,23 +23,21 @@ def user_login(request):
                 return redirect('dashboard')  
     else:
         form = AuthenticationForm()
-    return render(request, 'registration/login.html', {'form': form})
-
+    return render(request, 'budgetSystem/register.html', {'login_form': form, 'register_form': UserCreationForm()})
 
 def user_logout(request):
     logout(request)
     return redirect('login')  
 
-
 def user_register(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('login')  
     else:
-        form = CustomUserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
+        form = UserCreationForm()
+    return render(request, 'budgetSystem/register.html', {'login_form': AuthenticationForm(), 'register_form': form})
 
 @login_required
 def dashboard(request):
@@ -71,3 +69,28 @@ class BudgetListView(LoginRequiredMixin,ListView):
             return redirect('budgets_list')
         else:
             return render(request, self.template_name, {'budgets': self.get_queryset(), 'budget_form': budget_form})
+        
+        
+class CategoryListView(LoginRequiredMixin,ListView):
+    model = Category
+    template_name = 'budgetSystem/category_list.html'
+    context_object_name = 'categories'
+    ordering = ['name']
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_form'] = CategoryForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        category_form = CategoryForm(request.POST)
+        if category_form.is_valid():
+            category = category_form.save(commit=False)
+            category.user = request.user
+            category_form.save()
+            return redirect('categories_list')
+        else:
+            return render(request, self.template_name, {'categories': self.get_queryset(), 'category_form': category_form})       

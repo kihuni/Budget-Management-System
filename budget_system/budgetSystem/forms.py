@@ -9,6 +9,11 @@ class BudgetForm(forms.ModelForm):
         fields = ['name', 'start_date', 'end_date', 'max_spending_limit', 'target_savings']
         
 
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']
+
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     
