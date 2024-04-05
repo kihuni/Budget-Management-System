@@ -24,6 +24,9 @@ class Expense(models.Model):
     date = models.DateField()
     location = models.CharField(max_length=100, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.title} - {self.category.name} ({self.budget.name})" 
 
 class Income(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -39,3 +42,6 @@ class Transfer(models.Model):
     from_budget = models.ForeignKey(Budget, related_name='transfers_sent', on_delete=models.CASCADE)
     to_budget = models.ForeignKey(Budget, related_name='transfers_received', on_delete=models.CASCADE)
     notes = models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"From {self.from_budget.name} to {self.to_budget.name}" 

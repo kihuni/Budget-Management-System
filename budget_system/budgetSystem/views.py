@@ -117,7 +117,8 @@ class ExpenseListView(LoginRequiredMixin,ListView):
             expense_form.save()
             return redirect('expenses_list')
         else:
-            return render(request, self.template_name, {'expenses': self.get_queryset(), 'expense_form': expense_form})   
+            return render(request, self.template_name, {'expenses': self.get_queryset(), 'expense_form': expense_form})
+  
 
 class IncomeListView(LoginRequiredMixin,ListView):
     model = Income
@@ -165,4 +166,6 @@ class TransferListView(LoginRequiredMixin,ListView):
             transfer_form.save()
             return redirect('transfers_list')
         else:
-            return render(request, self.template_name, {'transfers': self.get_queryset(), 'transfer_form': transfer_form})            
+            return render(request, self.template_name, {'transfers': self.get_queryset(), 'transfer_form': transfer_form})    
+    
+            
