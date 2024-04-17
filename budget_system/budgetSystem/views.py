@@ -6,6 +6,13 @@ from django.contrib.auth.decorators import login_required
 from .forms import BudgetForm, CustomUserCreationForm, CategoryForm, ExpenseForm, IncomeForm, TransferForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Budget,Category,Expense,Income,Transfer
+from django.http import HttpResponse
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from django.db.models import Sum
+from .models import Expense
+import datetime
 
 from .models import *
 
@@ -45,6 +52,48 @@ def dashboard(request):
 
 def register(request):
     return render(request, 'budgetSystem/register.html')
+
+
+def generate_pdf_report(request):
+    # Get current month and year
+    today = datetime.date.today()
+    month = today.month
+    year = today.year
+
+    # Retrieve expenses for the current month
+    expenses = Expense.objects.filter(date__month=month, date__year=year)
+
+    # Aggregate total spending for each category
+    spending_by_category = expenses.values('category__name').annotate(total_spent=Sum('amount'))
+
+    # Create PDF document
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="monthly_spending_report_{month}_{year}.pdf"'
+
+    doc = SimpleDocTemplate(response, pagesize=letter)
+    elements = []
+
+    # Add title to the document
+    elements.append("Monthly Spending Report\n\n")
+
+    # Create table with spending data
+    data = [['Category', 'Total Spent']]
+    for item in spending_by_category:
+        data.append([item['category__name'], item['total_spent']])
+    
+    table = Table(data)
+    table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                               ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                               ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                               ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                               ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
+    elements.append(table)
+
+    # Build PDF document
+    doc.build(elements)
+    return response
 
 class BudgetListView(LoginRequiredMixin,ListView):
     model = Budget
