@@ -2,34 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {% load static %}
-    <title>Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="{% static './register.css' %}">
+    <title>budgets list</title>
 </head>
 <body>
-    <h1>Welcome to the Dashboard</h1>
-    
-    <!-- Login Form -->
-    <h2>Login</h2>
-    <form method="post" action="{% url 'login' %}">
+    <h1>Budget list</h1>
+    <ul>
+        {% for budget in budgets %}
+            <li>{{ budget.name }}</li>
+        {% empty %}
+            <li>No budgets found</li>
+        {% endfor %}
+    </ul>
+    <h2>Add a new budget</h2>
+    <form method="post">
         {% csrf_token %}
-        {{ login_form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-
-    <!-- Registration Form -->
-    <h2>Register</h2>
-    <form method="post" action="{% url 'user-register' %}">
-        {% csrf_token %}
-        {{ register_form.as_p }}
-        <button type="submit">Register</button>
-    </form>
-
-    <!-- Logout Button -->
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
+        {{ budget_form.as_p }}
+        <button type="submit">Add Budget</button>
 </body>
 </html>
 

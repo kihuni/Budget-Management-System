@@ -7,12 +7,19 @@
 <body>
     <h1>Budget system</h1>
 
-    <!-- Add links/buttons to navigate to different sections of the application -->
-    <a href="{% url 'budgets_list' %}">View Budgets</a>
-    <a href="{% url 'categories_list' %}">View Categories</a>
-    <a href="{% url 'expenses_list' %}">View Expenses</a>
-    <a href="{% url 'incomes_list' %}">View Incomes</a>
-    <a href="{% url 'transfers_list' %}">View Transfers</a>
-    <!-- Add more links/buttons as needed -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'budgets_list' %}">View Budgets</a></li>
+            <li><a href="{% url 'categories_list' %}">View Categories</a></li>
+            <li><a href="{% url 'expenses_list' %}">View Expenses</a><li>
+            <li><a href="{% url 'incomes_list' %}">View Incomes</a><li>
+            <li><a href="{% url 'transfers_list' %}">View Transfers</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Logout Button -->
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
 </body>
 </html>
