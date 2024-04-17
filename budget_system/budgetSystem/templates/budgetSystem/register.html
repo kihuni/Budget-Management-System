@@ -5,30 +5,57 @@
     {% load static %}
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/register.css' %}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'none';
+            
+            document.getElementById('login-btn').addEventListener('click', function() {
+                document.getElementById('login-form').style.display = 'block';
+                document.getElementById('register-form').style.display = 'none';
+            });
+
+            document.getElementById('register-btn').addEventListener('click', function() {
+                document.getElementById('register-form').style.display = 'block';
+                document.getElementById('login-form').style.display = 'none';
+            });
+        });
+    </script>
 </head>
 <body>
-    <h1>Welcome to the Dashboard</h1>
+    <div class="container">
+        <header class="animated-header">
+            <div class="logo">
+                <h2>Budget-trucker</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">About Budget-Trucker</a></li>
+                    <li><a href="#" id="login-btn">Log in</a></li>
+                    <li><a href="#" id="register-btn">Register</a><li>
+                </ul>
+            </nav>
+        </header>
     
-    <!-- Login Form -->
-    <h2>Login</h2>
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {{ login_form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-
-    <!-- Registration Form -->
-    <h2>Register</h2>
-    <form method="post" action="{% url 'user-register' %}">
-        {% csrf_token %}
-        {{ register_form.as_p }}
-        <button type="submit">Register</button>
-    </form>
-
-    <!-- Logout Button -->
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
+        <!-- Login Form -->
+        <div id="login-form">
+            <h2>Login</h2>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                {{ login_form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    
+        <!-- Registration Form -->
+        <div id="register-form">
+            <h2>Register</h2>
+            <form method="post" action="{% url 'user-register' %}">
+                {% csrf_token %}
+                {{ register_form.as_p }}
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
