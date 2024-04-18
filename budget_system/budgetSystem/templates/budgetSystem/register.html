@@ -5,22 +5,6 @@
     {% load static %}
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/register.css' %}">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('register-form').style.display = 'none';
-            
-            document.getElementById('login-btn').addEventListener('click', function() {
-                document.getElementById('login-form').style.display = 'block';
-                document.getElementById('register-form').style.display = 'none';
-            });
-
-            document.getElementById('register-btn').addEventListener('click', function() {
-                document.getElementById('register-form').style.display = 'block';
-                document.getElementById('login-form').style.display = 'none';
-            });
-        });
-    </script>
 </head>
 <body>
     <div class="container">
@@ -37,29 +21,6 @@
                 </ul>
             </nav>
         </header>
-    
-        <!-- Login Form -->
-        <div id="login-form">
-            <h2>Welcome back</h2>
-            <p>sign in to your account</p>
-            <form method="post" action="{% url 'login' %}">
-                {% csrf_token %}
-                {{ login_form.as_p }}
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    
-        <!-- Registration Form -->
-        <div id="register-form">
-            <h2>Register</h2>
-            <form method="post" action="{% url 'user-register' %}">
-                {% csrf_token %}
-                {{ register_form.as_p }}
-                <button type="submit">Register</button>
-            </form>
-        </div>
-    </form>
-
     <div class="container">
         <div class="img">
             <img src="{% static 'budgetSystem/images/budget.jpg' %}" alt="budget">
@@ -138,5 +99,18 @@
         </p>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Redirect to login page when login button is clicked
+            document.getElementById('login-btn').addEventListener('click', function() {
+                window.location.href = "{% url 'login' %}";
+            });
+
+            // Redirect to register page when register button is clicked
+            document.getElementById('register-btn').addEventListener('click', function() {
+                window.location.href = "{% url 'user-register' %}";
+            });
+        });
+    </script>
 </body>
 </html>
