@@ -19,7 +19,10 @@ Category Management: Users can create and manage categories to organize their ex
 
 Monthly Spending Analysis: A key feature of the system is the ability to generate a monthly PDF analysis of spending. This report provides users with a summary of their expenses for the current month, categorized by spending categories.
 
-Implementation Details:
+
+
+### Implementation Details:
+
 The system is implemented using Django, a high-level Python web framework. It utilizes Django's Model-View-Template (MVT) architecture for clean code organization and separation of concerns.
 
 Models: The system defines several models to represent entities such as budgets, expenses, income, transfers, and categories. These models are used to store data in the database and facilitate data manipulation.
