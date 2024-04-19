@@ -27,15 +27,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                print("User logged in successfully")
                 return redirect('dashboard')
-            
-            else:
-                print("Invalid username or password")  # Print a message for invalid credentials
-                # Optionally, you can pass an error message to the form for display
-                form.add_error(None, "Invalid username or password")  
-        else:
-            print("Form is not valid")  # Print a message if the form is not valid
     else:
         form = AuthenticationForm()
         print("Rendering login page")
@@ -51,11 +43,8 @@ def user_register(request):
         if form.is_valid():
             form.save()
             return redirect('login') 
-        else:
-            print("Form is not valid") 
     else:
         form = UserCreationForm()
-        print("Rendering registration page")
     return render(request, 'budgetSystem/user-register.html', {'login_form': AuthenticationForm(), 'register_form': form})
 
 @login_required
