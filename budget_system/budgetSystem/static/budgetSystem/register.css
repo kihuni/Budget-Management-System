@@ -111,6 +111,9 @@ nav ul li a:hover {
     height: 500px; /* Adjust the height of the image */
 }
 
+#budget {
+   max-width: 1800px;
+}
 
 #about, #budget {
     background-color: #fff; /* Added background color */

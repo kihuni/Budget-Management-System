@@ -4,18 +4,26 @@
   {% load static %}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/register.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/user-register.css' %}">
   <title>User register</title>
 </head>
 <body>
     <!-- Registration Form -->
     <div id="register-form">
       <h2>Register</h2>
+      <p>Fill in the following details to create your account:</p>
       <form method="post" action="{% url 'user-register' %}">
           {% csrf_token %}
-          {{ register_form.as_p }}
+          <label for="username">Username:</label>
+          {{ register_form.username }}
+          <label for="email">Email:</label>
+          {{ register_form.email }} 
+          <label for="password1">Password:</label>
+          {{ register_form.password1 }}
+          <label for="password2">Confirm Password:</label>
+          {{ register_form.password2 }}
           <button type="submit">Register</button>
       </form>
-</div>
+    </div>
 </body>
 </html>

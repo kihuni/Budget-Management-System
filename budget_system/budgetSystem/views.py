@@ -39,12 +39,12 @@ def user_logout(request):
 
 def user_register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('login') 
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'budgetSystem/user-register.html', {'login_form': AuthenticationForm(), 'register_form': form})
 
 @login_required
