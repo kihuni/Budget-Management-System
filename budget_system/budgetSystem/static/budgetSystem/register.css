@@ -1,186 +1,120 @@
-
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #edf2f6;
-}
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
 }
 
-header {
-    color: #2dc83f;
+.container {
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.animated-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px; /* Reduced margin for header */
-}
-.animated-header {
-    animation: slideIn 2s ease forwards;
-}
-
-/* Keyframes for header animation */
-@keyframes slideIn {
-    0% { transform: translateY(-50px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
 }
 
 .logo h2 {
     margin: 0;
-    margin-left: 20px;
-    font-size: 24px; /* Increased font size for logo */
-    color: #2dc83f; /* Matched color to header */
+    font-size: 24px;
+    color: #2dc83f;
 }
 
 nav ul {
-    list-style: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    margin-right: 20px;
 }
 
 nav ul li {
-    margin-right: 30px; /* Slightly reduced margin between nav items */
-    font-size: 20px; /* Slightly reduced font size for nav items */
+    margin-right: 20px;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #49c359;
-    transition: transform 0.5s;
+    color:  #2dc83f;
+    font-size: 16px;
+    transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #7ED957;
-    transform: translateY(-10px); /* Reduced transform on hover */
+    color:  #2dc83f;
 }
 
 .mini-container {
     display: flex;
-    justify-content: space-between; /* Spread the items horizontally */
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
-    border: 2px solid #2dc83f; /* Updated border color */
-    border-radius: 10px; /* Added border-radius for rounded corners */
-    padding: 20px; /* Added padding for better spacing */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added box-shadow for depth */
-    margin-bottom: 100px;
-    height: 1000px;
+    margin-top: 50px;
 }
 
 .mini-content {
-    max-width: 700px; /* Limit the width of the content */
-    margin-right: 50px; /* Adjusted space between content and image */
-    color: #333; /* Updated text color */
+    flex: 1;
+    padding-right: 20px;
 }
 
 .mini-content h1 {
-    font-size: 46px; /* Increased font size for header */
-    margin-bottom: 20px; /* Added margin below header */
+    font-size: 36px;
+    color: #333;
+    margin: 0 0 20px;
 }
 
 .mini-content p {
-    font-size: 18px; /* Increased font size for paragraphs */
-    margin-bottom: 15px; /* Added margin below paragraphs */
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
-.mini-content button {
-    padding: 10px 20px; /* Added padding to button */
-    font-size: 18px; /* Increased font size for button */
-    background-color: #2dc83f; /* Updated background color */
-    color: #fff; /* Updated text color */
-    border: none; /* Removed button border */
-    border-radius: 5px; /* Added border-radius for rounded corners */
-    cursor: pointer; /* Added cursor pointer */
-    transition: background-color 0.3s; /* Added transition for hover effect */
+.mini-content .register-link {
+    background-color:  #2dc83f;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.mini-content button:hover {
-    background-color: #49c359; /* Updated background color on hover */
-}
-
-.img {
-    margin-bottom: 20px; /* Add space between image and content */
-    border: #2dc83f 2px solid; /* Updated border color */
-    border-radius: 5px;
-    overflow: hidden; /* Hide any overflowing content */
-    
+.mini-content .register-link:hover {
+    background-color:  #72b97b;
 }
 
 .img img {
-    height: 500px; /* Adjust the height of the image */
-}
-
-#budget {
-   max-width: 1800px;
+    max-width: 100%;
+    height: auto;
 }
 
 #about, #budget {
-    background-color: #fff; /* Added background color */
-    border-radius: 10px; /* Added border-radius for rounded corners */
-    padding: 20px; /* Added padding for better spacing */
-    margin-bottom: 40px; /* Added margin bottom for space between sections */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added box-shadow for depth */
+    margin-top: 50px;
 }
 
 #about h2, #budget h2 {
-    color: #2dc83f; /* Updated heading color */
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 #about p, #budget p {
-    font-size: 16px; /* Updated font size for paragraphs */
-    color: #555; /* Updated text color */
-    margin-bottom: 15px; /* Added margin bottom for paragraphs */
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
 #about ul, #budget ul {
-    list-style: none; /* Removed default list styles */
-    padding-left: 0; /* Removed default list padding */
+    margin-bottom: 20px;
 }
 
 #about ul li, #budget ul li {
-    font-size: 14px; /* Updated font size for list items */
-    color: #333; /* Updated text color */
-    margin-bottom: 5px; /* Added margin bottom for list items */
-}
-
-#about ul li::before, #budget ul li::before {
-    content: '\2022'; /* Added bullet point for list items */
-    color: #2dc83f; /* Updated bullet color */
-    display: inline-block; /* Ensured bullet is inline with text */
-    width: 1em; /* Adjusted width for spacing */
-    margin-left: -1em; /* Adjusted margin for spacing */
-}
-
-#about ul li, #budget ul li {
-    padding-left: 1em; /* Added padding left for spacing */
+    list-style-type: disc;
+    margin-left: 20px;
 }
 
 #about ul li:last-child, #budget ul li:last-child {
-    margin-bottom: 0; /* Removed margin bottom for last list item */
+    margin-bottom: 0;
 }
-
-#about ul li, #budget ul li {
-    line-height: 1.6; /* Increased line height for better readability */
-}
-
-#about ul li::before, #budget ul li::before {
-    margin-right: 0.5em; /* Added margin right for spacing */
-}
-
-#about h2, #budget h2 {
-    font-size: 24px; /* Increased font size for headings */
-    margin-bottom: 20px; /* Added margin bottom for headings */
-}
-
-#about ul, #budget ul {
-    margin-bottom: 20px; /* Added margin bottom for lists */
-}
-
-#about p:last-child, #budget p:last-child {
-    margin-bottom: 0; /* Removed margin bottom for last paragraph */
-}
-
