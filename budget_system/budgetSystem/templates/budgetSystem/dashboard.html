@@ -4,27 +4,27 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/dashboard.css' %}">
     <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/dashboard.css' %}">
 </head>
 <body>
-    <h1>Budget system</h1>
-
     <nav>
+        <h1>Budget System</h1>
         <ul>
             <li><a href="{% url 'budgets_list' %}">View Budgets</a></li>
             <li><a href="{% url 'categories_list' %}">View Categories</a></li>
-            <li><a href="{% url 'expenses_list' %}">View Expenses</a><li>
-            <li><a href="{% url 'incomes_list' %}">View Incomes</a><li>
+            <li><a href="{% url 'expenses_list' %}">View Expenses</a></li>
+            <li><a href="{% url 'incomes_list' %}">View Incomes</a></li>
             <li><a href="{% url 'transfers_list' %}">View Transfers</a></li>
             <li><a href="{% url 'generate_pdf_report' 'monthly' %}">Generate Monthly Report</a></li>
             <li><a href="{% url 'generate_pdf_report' 'weekly' %}">Generate Weekly Report</a></li>
         </ul>
+        <!-- Logout Button -->
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
     </nav>
-    
-    <!-- Logout Button -->
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
 </body>
 </html>
+
