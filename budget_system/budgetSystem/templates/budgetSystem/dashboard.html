@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/dashboard.css' %}">
     <title>Dashboard</title>
 </head>
 <body>
@@ -14,6 +17,8 @@
             <li><a href="{% url 'expenses_list' %}">View Expenses</a><li>
             <li><a href="{% url 'incomes_list' %}">View Incomes</a><li>
             <li><a href="{% url 'transfers_list' %}">View Transfers</a></li>
+            <li><a href="{% url 'generate_pdf_report' 'monthly' %}">Generate Monthly Report</a></li>
+            <li><a href="{% url 'generate_pdf_report' 'weekly' %}">Generate Weekly Report</a></li>
         </ul>
     </nav>
     

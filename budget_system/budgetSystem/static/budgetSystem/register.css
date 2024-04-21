@@ -104,7 +104,10 @@ nav ul li a:hover {
 
 .img {
     margin-bottom: 20px; /* Add space between image and content */
-    border-radius: 2px;
+    border: #2dc83f 2px solid; /* Updated border color */
+    border-radius: 5px;
+    overflow: hidden; /* Hide any overflowing content */
+    
 }
 
 .img img {

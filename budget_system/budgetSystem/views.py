@@ -11,6 +11,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from django.db.models import Sum
+from reportlab.platypus import Paragraph
 from .models import Expense
 import datetime
 
@@ -56,27 +57,39 @@ def register(request):
     print('hi there i am in register')
 
 
-def generate_pdf_report(request):
-    # Get current month and year
+def generate_pdf_report(request, period='monthly'):
+    # Get current date
     today = datetime.date.today()
-    month = today.month
-    year = today.year
 
-    # Retrieve expenses for the current month
-    expenses = Expense.objects.filter(date__month=month, date__year=year)
+    if period == 'monthly':
+        # For monthly report, get current month and year
+        month = today.month
+        year = today.year
+
+        # Set date range for the current month
+        start_date = datetime.date(year, month, 1)
+        end_date = datetime.date(year, month, 1) + datetime.timedelta(days=31)
+
+    elif period == 'weekly':
+        # For weekly report, get the start and end date of the current week
+        start_date = today - datetime.timedelta(days=today.weekday())  # Get Monday of the current week
+        end_date = start_date + datetime.timedelta(days=6)  # Get Sunday of the current week
+
+    # Retrieve expenses for the selected period
+    expenses = Expense.objects.filter(date__range=[start_date, end_date])
 
     # Aggregate total spending for each category
     spending_by_category = expenses.values('category__name').annotate(total_spent=Sum('amount'))
 
     # Create PDF document
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="monthly_spending_report_{month}_{year}.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="{period}_spending_report_{start_date}_{end_date}.pdf"'
 
     doc = SimpleDocTemplate(response, pagesize=letter)
     elements = []
 
     # Add title to the document
-    elements.append("Monthly Spending Report\n\n")
+    elements.append(Paragraph("Monthly Spending Report\n\n", style=None))
 
     # Create table with spending data
     data = [['Category', 'Total Spent']]
@@ -96,7 +109,6 @@ def generate_pdf_report(request):
     # Build PDF document
     doc.build(elements)
     return response
-
 class BudgetListView(LoginRequiredMixin,ListView):
     model = Budget
     template_name = 'budgetSystem/budget_list.html'

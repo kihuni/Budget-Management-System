@@ -54,3 +54,8 @@ body {
 #login-form button:hover {
     background-color: #49c359; /* Updated button background color on hover */
 }
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #49c359;
+}

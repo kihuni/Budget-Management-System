@@ -1,6 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.urls import path, include
+from .views import generate_pdf_report
 
 from . import views
 
@@ -15,4 +16,6 @@ urlpatterns = [
     path('expenses/', login_required(views.ExpenseListView.as_view()), name='expenses_list'),
     path('incomes/', login_required(views.IncomeListView.as_view()), name='incomes_list'),
     path('transfers/', login_required(views.TransferListView.as_view()), name='transfers_list'),
+    path('generate-pdf/<str:period>/', generate_pdf_report, name='generate_pdf_report'),
+
 ]
