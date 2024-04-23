@@ -12,16 +12,21 @@
     <div id="register-form">
       <h2>Register</h2>
       <p>Fill in the following details to create your account:</p>
-      <form method="post" action="{% url 'user-register' %}">
+      <form method="post" action="{% url 'user-register' %}" enctype="multipart/form-data">
           {% csrf_token %}
           <label for="username">Username:</label>
-          {{ register_form.username }}
+          {{ user_form.username }}
           <label for="email">Email:</label>
-          {{ register_form.email }} 
+          {{ user_form.email }} 
           <label for="password1">Password:</label>
-          {{ register_form.password1 }}
+          {{ user_form.password1 }}
           <label for="password2">Confirm Password:</label>
-          {{ register_form.password2 }}
+          {{ user_form.password2 }}
+
+          <!-- User Profile Image Upload -->
+          <label for="profile_image">Profile Image:</label>
+          {{ profile_form.profile_image }}
+
           <button type="submit">Register</button>
       </form>
     </div>

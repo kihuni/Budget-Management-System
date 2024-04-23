@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>     
 <html lang="en">
 <head>
     {% load static %}
@@ -10,6 +10,14 @@
 <body>
     <nav>
         <h1>Budget System</h1>
+        {% if user_profile %}
+            <div class="user-profile">
+                {% if user_profile.profile_image %}
+                    <img src="{{ user_profile.profile_image.url }}" alt="Profile Image">
+                {% endif %}
+                <p>{{ user.username }}</p>
+            </div>
+        {% endif %}
         <ul>
             <li><a href="{% url 'budgets_list' %}">View Budgets</a></li>
             <li><a href="{% url 'categories_list' %}">View Categories</a></li>
@@ -19,7 +27,7 @@
             <li><a href="{% url 'generate_pdf_report' 'monthly' %}">Generate Monthly Report</a></li>
             <li><a href="{% url 'generate_pdf_report' 'weekly' %}">Generate Weekly Report</a></li>
         </ul>
-        <!-- Logout Button -->
+         
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit">Logout</button>
@@ -27,4 +35,3 @@
     </nav>
 </body>
 </html>
-

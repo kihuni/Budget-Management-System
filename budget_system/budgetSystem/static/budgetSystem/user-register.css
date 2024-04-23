@@ -21,11 +21,13 @@
 
 #register-form input[type="text"],
 #register-form input[type="email"],
-#register-form input[type="password"] {
+#register-form input[type="password"],
+#register-form input[type="file"] {
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 100%; /* Ensure input fields take full width */
 }
 
 #register-form button {
@@ -36,6 +38,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 100%; /* Ensure button takes full width */
 }
 
 #register-form button:hover {

@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import BudgetForm, CustomUserCreationForm, CategoryForm, ExpenseForm, IncomeForm, TransferForm
+from .forms import BudgetForm, CustomUserCreationForm, CategoryForm, ExpenseForm, IncomeForm, TransferForm,UserProfileForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Budget,Category,Expense,Income,Transfer
 from django.http import HttpResponse
@@ -40,13 +40,19 @@ def user_logout(request):
 
 def user_register(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login') 
+        user_form = CustomUserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            return redirect('login')
     else:
-        form = CustomUserCreationForm()
-    return render(request, 'budgetSystem/user-register.html', {'login_form': AuthenticationForm(), 'register_form': form})
+        user_form = CustomUserCreationForm()
+        profile_form = UserProfileForm()
+    return render(request, 'budgetSystem/user-register.html', {'user_form': user_form, 'profile_form': profile_form})
+
 
 @login_required
 def dashboard(request):
@@ -56,6 +62,16 @@ def register(request):
     return render(request, 'budgetSystem/register.html')
     print('hi there i am in register')
 
+
+def dashboard(request):
+    # Fetch the current user
+    user = request.user
+    # Fetch the user's profile
+    try:
+        user_profile = UserProfile.objects.get(user=user)
+    except UserProfile.DoesNotExist:
+        user_profile = None
+    return render(request, 'budgetSystem/dashboard.html', {'user': user, 'user_profile': user_profile})
 
 def generate_pdf_report(request, period='monthly'):
     # Get current date
@@ -109,6 +125,7 @@ def generate_pdf_report(request, period='monthly'):
     # Build PDF document
     doc.build(elements)
     return response
+
 class BudgetListView(LoginRequiredMixin,ListView):
     model = Budget
     template_name = 'budgetSystem/budget_list.html'

@@ -118,3 +118,86 @@ nav ul li a:hover {
 #about ul li:last-child, #budget ul li:last-child {
     margin-bottom: 0;
 }
+/* Define mobile responsiveness */
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    .animated-header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo {
+        margin-bottom: 20px;
+    }
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.8); /* Make navbar slightly visible */
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px; /* Adjust navbar margin */
+        width: 100%; /* Make the navbar full width */
+    }
+    nav ul li {
+        margin: 10px 0;
+    }
+    .mini-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the items horizontally */
+    }
+    .mini-content {
+        padding-right: 0;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .img {
+        margin-top: 20px;
+    }
+    .img img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+}
+
+/* Additional mobile responsiveness if needed */
+@media only screen and (max-width: 480px) {
+    .logo h2 {
+        font-size: 20px;
+    }
+    .mini-content h1 {
+        font-size: 24px;
+    }
+    .mini-content p {
+        font-size: 14px;
+    }
+    .register-link {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+    #about h2, #budget h2 {
+        font-size: 20px;
+    }
+    #about p, #budget p {
+        font-size: 14px;
+    }
+}
+
+/* Adjustments for smaller screens */
+@media only screen and (max-width: 360px) {
+    .nav ul li {
+        font-size: 14px; /* Decrease font size for navbar items */
+    }
+    .mini-container {
+        padding: 0 10px; /* Add padding to mini-container */
+    }
+    .mini-content {
+        width: 100%; /* Ensure mini-content spans full width */
+    }
+}
+
+/* Add more media queries as needed */
+
