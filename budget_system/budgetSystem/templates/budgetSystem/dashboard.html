@@ -9,15 +9,17 @@
 </head>
 <body>
     <nav>
-        <h1>Budget System</h1>
-        {% if user_profile %}
-            <div class="user-profile">
-                {% if user_profile.profile_image %}
-                    <img src="{{ user_profile.profile_image.url }}" alt="Profile Image">
-                {% endif %}
-                <p>{{ user.username }}</p>
-            </div>
-        {% endif %}
+        <div class="header">
+            <h1>Budget System</h1>
+            {% if user_profile %}
+                <div class="user-profile">
+                    {% if user_profile.profile_image %}
+                        <img src="{{ user_profile.profile_image.url }}" alt="Profile Image">
+                    {% endif %}
+                    <p>{{ user.username }}</p>
+                </div>
+            {% endif %}
+        </div>
         <ul>
             <li><a href="{% url 'budgets_list' %}">View Budgets</a></li>
             <li><a href="{% url 'categories_list' %}">View Categories</a></li>

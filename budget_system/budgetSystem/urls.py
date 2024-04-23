@@ -4,8 +4,7 @@ from django.urls import path, include
 from .views import generate_pdf_report
 
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('login/', views.user_login, name='login'),
@@ -21,5 +20,3 @@ urlpatterns = [
     path('generate-pdf/<str:period>/', generate_pdf_report, name='generate_pdf_report'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
