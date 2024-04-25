@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'budgetSystem/register.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+{% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/login.css' %}">
-    <title>Login</title>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
       <!-- Login Form -->
       <div id="login-form">
         <h2>Welcome back</h2>
@@ -19,5 +18,4 @@
         </form>
         <a class="register-link" href="{% url 'user-register' %}">or Register</a>
     </div>
-
-</body>
+{% endblock %}

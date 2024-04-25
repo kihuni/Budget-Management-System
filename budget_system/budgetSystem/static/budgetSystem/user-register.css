@@ -1,46 +1,54 @@
-#register-form {
-    max-width: 400px;
-    margin: auto; /* Center horizontally */
-    margin-top: 20vh; /* Center vertically */
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+@media only screen and (max-width: 768px) {
+    /* Adjust the styles here for small screens */
+    #register-form {
+        padding: 20px;
+    }
+    #register-form h2 {
+        font-size: 1.5rem;
+    }
+    #register-form p {
+        font-size: 1.2rem;
+    }
+    #register-form form label,
+    #register-form form input,
+    #register-form form button {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
 
-#register-form h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #2dc83f;
-}
-
-#register-form form {
-    display: flex;
-    flex-direction: column;
-}
-
-#register-form input[type="text"],
-#register-form input[type="email"],
-#register-form input[type="password"],
-#register-form input[type="file"] {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%; /* Ensure input fields take full width */
-}
-
-#register-form button {
-    background-color: #2dc83f;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%; /* Ensure button takes full width */
-}
-
-#register-form button:hover {
-    background-color: #49c359;
+/* Styles for larger screens */
+@media only screen and (min-width: 769px) {
+    /* Adjust the styles here for large screens */
+    #register-form {
+        width: 50%;
+        margin: 0 auto;
+        padding: 40px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+    #register-form h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    #register-form p {
+        font-size: 1.4rem;
+        margin-bottom: 30px;
+    }
+    #register-form form label {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    #register-form form input {
+        width: calc(100% - 10px);
+        margin-bottom: 20px;
+        padding: 10px;
+        font-size: 1rem;
+    }
+    #register-form form button {
+        width: calc(100% - 10px);
+        padding: 15px;
+        font-size: 1.2rem;
+    }
 }

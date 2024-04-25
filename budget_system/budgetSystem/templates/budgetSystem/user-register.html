@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  {% load static %}
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/user-register.css' %}">
-  <title>User register</title>
-</head>
-<body>
-    <!-- Registration Form -->
+{% extends 'budgetSystem/register.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/user-register.css' %}">
+{% endblock %}
+
+{% block content %}
+       <!-- Registration Form -->
     <div id="register-form">
       <h2>Register</h2>
       <p>Fill in the following details to create your account:</p>
@@ -30,5 +28,4 @@
           <button type="submit">Register</button>
       </form>
     </div>
-</body>
-</html>
+{% endblock %}

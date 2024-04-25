@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'budgetSystem/transfer_list.css' %}">
-    <title>Transfer</title>
 
+{% extends 'budgetSystem/register.html' %}
+{% load static %}
+{% block title %}Transfer list{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/transfer_list.css' %}">
+{% endblock %}
+
+{% block content %}
     <h1>transfer list</h1>
     <ul>
         {% for transfer in transfers %}
@@ -21,8 +22,4 @@
         {% csrf_token %}
         {{ transfer_form.as_p }}
         <button type="submit">Add Transfer</button>
-</head>
-<body>
-    
-</body>
-</html>
+{% endblock %}

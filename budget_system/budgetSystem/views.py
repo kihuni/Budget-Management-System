@@ -60,7 +60,6 @@ def dashboard(request):
 
 def register(request):
     return render(request, 'budgetSystem/register.html')
-    print('hi there i am in register')
 
 
 def dashboard(request):
