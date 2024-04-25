@@ -5,8 +5,10 @@
     {% load static %}
     <meta charset="UTF-8">
     <title>{% block title %}Dashboard{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% block css %}{% endblock %}">
+    {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/register.css' %}">
+    {% endblock %}
+
 </head>
 <body>
 <div class="container">

@@ -1,15 +1,45 @@
-@media only screen and (max-width: 768px) {
-    /* Adjust the styles here for mobile devices */
-    #login-form {
-        padding: 20px;
-    }
-    #login-form h2 {
-        font-size: 1.5rem;
-    }
-    #login-form p {
-        font-size: 1.2rem;
-    }
-    #login-form form {
-        margin-top: 20px;
-    }
+#login-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.register-link {
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    color: #333;
 }
