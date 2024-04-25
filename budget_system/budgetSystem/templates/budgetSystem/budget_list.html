@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <title>budgets list</title>
-    <link rel="stylesheet" href="{% static 'budgetSystem/budget_list.css' %}">
-</head>
-<body>
+{% extends 'budgetSystem/register.html' %}
+{% load static %}
+{% block title %}budgets list{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/budget_list.css' %}">
+{% endblock %}
+
+{% block content %}
     <h1>Budget list</h1>
     <ul>
         <p>Your budget list:</p>
@@ -21,7 +21,5 @@
         {% csrf_token %}
         {{ budget_form.as_p }}
         <button type="submit">Add Budget</button>
-</body>
-</html>
-
+{% endblock %}
 

@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'budgetSystem/category_list.css' %}">
-    <title>Category</title>
-</head>
-<body>
+{% extends 'budgetSystem/register.html' %}
+{% load static %}
+{% block title %}Category{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/category_list.css' %}">
+{% endblock %}
+
+{% block content %}
     <h1>Category list</h1>
     <ul>
         <p>Your category list:</p>
@@ -24,5 +23,4 @@
         {% csrf_token %}
         {{ category_form.as_p }}
         <button type="submit">Add Category</button>
-</body>
-</html>
+{% endblock %}

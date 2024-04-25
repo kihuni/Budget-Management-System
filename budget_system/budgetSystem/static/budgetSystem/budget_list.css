@@ -1,59 +1,42 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-}
-
-h1, h2 {
+h1 {
     text-align: center;
-    margin-top: 20px; /* Adjusted margin for better spacing */
-    color: #2dc83f;
+    padding: 20px;
+    transition: padding 0.3s ease; /* Add transition for padding */
+    color: #333; /* Text color */
 }
 
 ul {
     list-style-type: none;
     padding: 0;
-    margin: 0 auto;
-    text-align: center;
+    margin: 0;
+}
+
+p {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #666; /* Text color */
 }
 
 li {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    margin: 10px auto;
-    padding: 10px;
-    width: 90%; /* Adjusted width for better fit on mobile */
-    max-width: 400px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-li:hover {
-    transform: translateY(-5px);
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333; /* Text color */
 }
 
 form {
     text-align: center;
-    margin-top: 20px;
 }
 
-button {
-    background-color: #2dc83f;
+button[type="submit"] {
+    background-color: #007bff;
     color: #fff;
     border: none;
     padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #6edf7c;
-}
-
-/* Media Query for Mobile View */
-@media screen and (max-width: 600px) {
-    li {
-        width: 100%; /* Adjusted width for full width on smaller screens */
-    }
+button[type="submit"]:hover {
+    background-color: #0056b3;
 }

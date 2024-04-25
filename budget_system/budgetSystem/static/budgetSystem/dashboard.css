@@ -1,101 +1,69 @@
-/* dashboard.css */
-
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa; /* Background color of the body */
 }
-
-h1 {
-    text-align: center;
-    padding: 20px;
-    transition: padding 0.3s ease; /* Add transition for padding */
-}
-
 nav {
-    background-color:  #2dc83f;
+    background-color: #2dc83f;
     color: #fff;
-    padding: 10px;
-    width: 300px; /* Set width of the navigation menu */
-    height: calc(100vh - 40px); /* Make the navigation menu full height minus h1 padding */
-    position: fixed; /* Fixed position */
-    top: 0;
-    left: 0;
-    overflow-y: auto; 
-    transition: width 0.3s ease; 
+    padding: 20px;
 }
-
 .header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
-
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
 .user-profile {
     display: flex;
     align-items: center;
 }
-
 .user-profile img {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 10px;
 }
-
-nav:hover {
-    width: 200px; /* Expand width on hover */
+.user-profile p {
+    margin: 0;
+    font-size: 16px;
 }
-
-nav ul {
+ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    transition: opacity 0.3s ease; /* Add transition for opacity */
 }
-
-nav:hover ul {
-    opacity: 1; /* Show menu items on hover */
-}
-
-nav ul li {
+ul li {
     margin-bottom: 10px;
 }
-
-nav ul li a {
-    display: block;
-    padding: 10px;
+ul li a {
     color: #fff;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    font-size: 18px;
+    transition: color 0.3s ease;
 }
-
-nav ul li a:hover {
-    background-color: #555;
-}
-
-/* Logout Button */
-form {
-    text-align: center;
-    margin-top: auto; /* Push logout button to the bottom */
-    transition: opacity 0.3s ease; /* Add transition for opacity */
-}
-
-form:hover {
-    opacity: 1; /* Show logout button on hover */
-}
-
-button {
-    background-color: #dc3545;
+ul li a:hover {
     color: #fff;
+    text-decoration: underline;
+}
+form {
+    margin-top: 20px;
+}
+button[type="submit"] {
+    background-color: #fff;
+    color: #2dc83f;
     border: none;
     padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-button:hover {
-    background-color: #c82333;
+button[type="submit"]:hover {
+    background-color: #49c359;
+    color: #fff;
 }

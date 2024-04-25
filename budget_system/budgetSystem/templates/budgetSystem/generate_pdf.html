@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generate PDF Report</title>
-</head>
-<body>
+{% extends 'budgetSystem/register.html' %}
+{% load static %}
+{% block title %}Generate PDF Report{% endblock %}
+
+
+{% block content %}
     <h1>Generate PDF Report</h1>
     <p>Choose a period:</p>
     <a href="{% url 'generate_pdf_report' 'monthly' %}">Generate Monthly Report</a>
     <a href="{% url 'generate_pdf_report' 'weekly' %}">Generate Weekly Report</a>
-</body>
-</html>
+{% endblock %}

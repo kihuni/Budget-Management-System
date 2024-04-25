@@ -1,39 +1,37 @@
-<!DOCTYPE HTML>     
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+{% extends 'budgetSystem/register.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+
+{% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/dashboard.css' %}">
-</head>
-<body>
-    <nav>
-        <div class="header">
-            <h1>Budget System</h1>
-            {% if user_profile %}
-                <div class="user-profile">
-                    {% if user_profile.profile_image %}
-                        <img src="{{ user_profile.profile_image.url }}" alt="Profile Image">
-                    {% endif %}
-                    <p>{{ user.username }}</p>
-                </div>
-            {% endif %}
-        </div>
-        <ul>
-            <li><a href="{% url 'budgets_list' %}">View Budgets</a></li>
-            <li><a href="{% url 'categories_list' %}">View Categories</a></li>
-            <li><a href="{% url 'expenses_list' %}">View Expenses</a></li>
-            <li><a href="{% url 'incomes_list' %}">View Incomes</a></li>
-            <li><a href="{% url 'transfers_list' %}">View Transfers</a></li>
-            <li><a href="{% url 'generate_pdf_report' 'monthly' %}">Generate Monthly Report</a></li>
-            <li><a href="{% url 'generate_pdf_report' 'weekly' %}">Generate Weekly Report</a></li>
-        </ul>
-         
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    </nav>
-</body>
-</html>
+{% endblock %}
+
+{% block content %}
+<nav>
+    <div class="header">
+        <h1>Budget System</h1>
+        {% if user_profile %}
+            <div class="user-profile">
+                {% if user_profile.profile_image %}
+                    <img src="{{ user_profile.profile_image.url }}" alt="Profile Image">
+                {% endif %}
+                <p>{{ user.username }}</p>
+            </div>
+        {% endif %}
+    </div>
+    <ul>
+        <li><a href="{% url 'budgets_list' %}">View Budgets</a></li>
+        <li><a href="{% url 'categories_list' %}">View Categories</a></li>
+        <li><a href="{% url 'expenses_list' %}">View Expenses</a></li>
+        <li><a href="{% url 'incomes_list' %}">View Incomes</a></li>
+        <li><a href="{% url 'transfers_list' %}">View Transfers</a></li>
+        <li><a href="{% url 'generate_pdf_report' 'monthly' %}">Generate Monthly Report</a></li>
+        <li><a href="{% url 'generate_pdf_report' 'weekly' %}">Generate Weekly Report</a></li>
+    </ul>
+     
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</nav>
+{% endblock %}
