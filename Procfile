@@ -1,0 +1,1 @@
+web: gunicorn budget_system.wsgi:application
