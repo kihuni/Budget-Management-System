@@ -1,23 +1,17 @@
-from django.shortcuts import render,redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login,logout, authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import BudgetForm, CustomUserCreationForm, CategoryForm, ExpenseForm, IncomeForm, TransferForm,UserProfileForm
+from .forms import BudgetForm, CustomUserCreationForm, CategoryForm, ExpenseForm, IncomeForm, TransferForm, UserProfileForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Budget,Category,Expense,Income,Transfer
+from .models import Budget, Category, Expense, Income, Transfer, UserProfile
 from django.http import HttpResponse
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from django.db.models import Sum
-from reportlab.platypus import Paragraph
-from .models import Expense
 import datetime
-
-from .models import *
-
-# Create your views here.
 
 def user_login(request):
     if request.method == 'POST':
@@ -31,12 +25,11 @@ def user_login(request):
                 return redirect('dashboard')
     else:
         form = AuthenticationForm()
-        print("Rendering login page")
     return render(request, 'budgetSystem/login.html', {'login_form': form, 'register_form': UserCreationForm()})
 
 def user_logout(request):
     logout(request)
-    return redirect('register')  
+    return redirect('landing_page')  
 
 def user_register(request):
     if request.method == 'POST':
@@ -53,19 +46,12 @@ def user_register(request):
         profile_form = UserProfileForm()
     return render(request, 'budgetSystem/user-register.html', {'user_form': user_form, 'profile_form': profile_form})
 
+def landing_page(request):
+    return render(request, 'budgetSystem/landing_page.html')
 
 @login_required
 def dashboard(request):
-    return render(request, 'budgetSystem/dashboard.html')
-
-def register(request):
-    return render(request, 'budgetSystem/register.html')
-
-
-def dashboard(request):
-    # Fetch the current user
     user = request.user
-    # Fetch the user's profile
     try:
         user_profile = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
@@ -73,40 +59,32 @@ def dashboard(request):
     return render(request, 'budgetSystem/dashboard.html', {'user': user, 'user_profile': user_profile})
 
 def generate_pdf_report(request, period='monthly'):
-    # Get current date
     today = datetime.date.today()
 
     if period == 'monthly':
-        # For monthly report, get current month and year
         month = today.month
         year = today.year
-
-        # Set date range for the current month
         start_date = datetime.date(year, month, 1)
-        end_date = datetime.date(year, month, 1) + datetime.timedelta(days=31)
+        if month == 12:
+            end_date = datetime.date(year + 1, 1, 1)
+        else:
+            end_date = datetime.date(year, month + 1, 1)
 
     elif period == 'weekly':
-        # For weekly report, get the start and end date of the current week
-        start_date = today - datetime.timedelta(days=today.weekday())  # Get Monday of the current week
-        end_date = start_date + datetime.timedelta(days=6)  # Get Sunday of the current week
+        start_date = today - datetime.timedelta(days=today.weekday())
+        end_date = start_date + datetime.timedelta(days=6)
 
-    # Retrieve expenses for the selected period
     expenses = Expense.objects.filter(date__range=[start_date, end_date])
-
-    # Aggregate total spending for each category
     spending_by_category = expenses.values('category__name').annotate(total_spent=Sum('amount'))
 
-    # Create PDF document
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{period}_spending_report_{start_date}_{end_date}.pdf"'
 
     doc = SimpleDocTemplate(response, pagesize=letter)
     elements = []
 
-    # Add title to the document
     elements.append(Paragraph("Monthly Spending Report\n\n", style=None))
 
-    # Create table with spending data
     data = [['Category', 'Total Spent']]
     for item in spending_by_category:
         data.append([item['category__name'], item['total_spent']])
@@ -121,11 +99,10 @@ def generate_pdf_report(request, period='monthly'):
                                ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
     elements.append(table)
 
-    # Build PDF document
     doc.build(elements)
     return response
 
-class BudgetListView(LoginRequiredMixin,ListView):
+class BudgetListView(LoginRequiredMixin, ListView):
     model = Budget
     template_name = 'budgetSystem/budget_list.html'
     context_object_name = 'budgets'
@@ -150,7 +127,7 @@ class BudgetListView(LoginRequiredMixin,ListView):
             return render(request, self.template_name, {'budgets': self.get_queryset(), 'budget_form': budget_form})
         
         
-class CategoryListView(LoginRequiredMixin,ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = 'budgetSystem/category_list.html'
     context_object_name = 'categories'
@@ -174,7 +151,7 @@ class CategoryListView(LoginRequiredMixin,ListView):
         else:
             return render(request, self.template_name, {'categories': self.get_queryset(), 'category_form': category_form})
 
-class ExpenseListView(LoginRequiredMixin,ListView):
+class ExpenseListView(LoginRequiredMixin, ListView):
     model = Expense
     template_name = 'budgetSystem/expense_list.html'
     context_object_name = 'expenses'
@@ -199,7 +176,7 @@ class ExpenseListView(LoginRequiredMixin,ListView):
             return render(request, self.template_name, {'expenses': self.get_queryset(), 'expense_form': expense_form})
   
 
-class IncomeListView(LoginRequiredMixin,ListView):
+class IncomeListView(LoginRequiredMixin, ListView):
     model = Income
     template_name = 'budgetSystem/income_list.html'
     context_object_name = 'incomes'
@@ -222,8 +199,7 @@ class IncomeListView(LoginRequiredMixin,ListView):
             return redirect('incomes_list')
         else:
             return render(request, self.template_name, {'incomes': self.get_queryset(), 'income_form': income_form})
-        
-class TransferListView(LoginRequiredMixin,ListView):
+class TransferListView(LoginRequiredMixin, ListView):
     model = Transfer
     template_name = 'budgetSystem/transfer_list.html'
     context_object_name = 'transfers'
@@ -245,6 +221,4 @@ class TransferListView(LoginRequiredMixin,ListView):
             transfer_form.save()
             return redirect('transfers_list')
         else:
-            return render(request, self.template_name, {'transfers': self.get_queryset(), 'transfer_form': transfer_form})    
-    
-            
+            return render(request, self.template_name, {'transfers': self.get_queryset(), 'transfer_form': transfer_form})

@@ -1,11 +1,9 @@
-{% extends 'budgetSystem/register.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}Generate PDF Report{% endblock %}
-
 
 {% block content %}
-    <h1>Generate PDF Report</h1>
-    <p>Choose a period:</p>
-    <a href="{% url 'generate_pdf_report' 'monthly' %}">Generate Monthly Report</a>
-    <a href="{% url 'generate_pdf_report' 'weekly' %}">Generate Weekly Report</a>
+<h1 class="mt-4">Generate PDF Report</h1>
+<p>Choose a period:</p>
+<a href="{% url 'generate_pdf_report' 'monthly' %}" class="btn btn-secondary">Generate Monthly Report</a>
+<a href="{% url 'generate_pdf_report' 'weekly' %}" class="btn btn-secondary">Generate Weekly Report</a>
 {% endblock %}

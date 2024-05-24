@@ -1,25 +1,17 @@
-{% extends 'budgetSystem/register.html' %}
-{% load static %}
-{% block title %}budgets list{% endblock %}
-
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/budget_list.css' %}">
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>Budget list</h1>
-    <ul>
-        <p>Your budget list:</p>
-        {% for budget in budgets %}
-            <li>{{ budget.name }}</li>
-        {% empty %}
-            <li>No budgets found</li>
-        {% endfor %}
-    </ul>
-    <h2>Add a new budget</h2>
+<div class="container">
+    <h2>Budgets</h2>
     <form method="post">
         {% csrf_token %}
         {{ budget_form.as_p }}
-        <button type="submit">Add Budget</button>
+        <button type="submit" class="btn btn-primary">Add Budget</button>
+    </form>
+    <ul class="list-group">
+        {% for budget in budgets %}
+        <li class="list-group-item">{{ budget.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
-

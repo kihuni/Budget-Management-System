@@ -1,25 +1,17 @@
-
-{% extends 'budgetSystem/register.html' %}
-{% load static %}
-{% block title %}Transfer list{% endblock %}
-
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/transfer_list.css' %}">
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>transfer list</h1>
-    <ul>
-        {% for transfer in transfers %}
-            <li>{{ transfer.name }} - {{ transfer.amount }} - {{ transfer.date }}</li>
-        {% empty %}
-            <li>No transfers found</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Add New Transfer</h2>
+<div class="container">
+    <h2>Transfers</h2>
     <form method="post">
         {% csrf_token %}
         {{ transfer_form.as_p }}
-        <button type="submit">Add Transfer</button>
+        <button type="submit" class="btn btn-primary">Add Transfer</button>
+    </form>
+    <ul class="list-group">
+        {% for transfer in transfers %}
+        <li class="list-group-item">{{ transfer.amount }} from {{ transfer.from_budget }} to {{ transfer.to_budget }}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

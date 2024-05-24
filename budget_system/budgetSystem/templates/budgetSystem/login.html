@@ -1,24 +1,12 @@
-{% extends 'budgetSystem/register.html' %}
-{% load static %}
-
-{% block title %}
-    Login
-{% endblock %}
-
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/login.css' %}">
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <!-- Login Form -->
-    <div id="login-form">
-        <h2>Welcome back</h2>
-        <p>Sign in to your account</p>
-        <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            {{ login_form.as_p }}
-            <button type="submit">Login</button>
-        </form>
-        <a class="register-link" href="{% url 'user-register' %}">or Register</a>
-    </div>
+<div class="container">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
 {% endblock %}

@@ -1,24 +1,16 @@
-{% extends 'budgetSystem/register.html' %}
-{% load static %}
-{% block title %}Income{% endblock %}
-
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/income_list.css' %}">
-{% endblock %}
-
+{% extends 'base.html' %}
 {% block content %}
-<h1>Income list</h1>
-<ul>
-    {% for income in incomes %}
-        <li>{{ income.name }} - {{ income.amount }} - {{ income.date }}</li>
-    {% empty %}
-        <li>No incomes found</li>
-    {% endfor %}
-</ul>
-
-<h2>Add New Income</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ income_form.as_p }}
-    <button type="submit">Add Income</button>
+<div class="container">
+    <h2>Incomes</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ income_form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Income</button>
+    </form>
+    <ul class="list-group">
+        {% for income in incomes %}
+        <li class="list-group-item">{{ income.source }} - {{ income.amount }}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

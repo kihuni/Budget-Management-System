@@ -1,31 +1,13 @@
-{% extends 'budgetSystem/register.html' %}
-{% load static %}
-
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/user-register.css' %}">
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-       <!-- Registration Form -->
-    <div id="register-form">
-      <h2>Register</h2>
-      <p>Fill in the following details to create your account:</p>
-      <form method="post" action="{% url 'user-register' %}" enctype="multipart/form-data">
-          {% csrf_token %}
-          <label for="username">Username:</label>
-          {{ user_form.username }}
-          <label for="email">Email:</label>
-          {{ user_form.email }} 
-          <label for="password1">Password:</label>
-          {{ user_form.password1 }}
-          <label for="password2">Confirm Password:</label>
-          {{ user_form.password2 }}
-
-          <!-- User Profile Image Upload -->
-          <label for="profile_image">Profile Image:</label>
-          {{ profile_form.profile_image }}
-
-          <button type="submit">Register</button>
-      </form>
-    </div>
+<div class="container">
+    <h2>Register</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+</div>
 {% endblock %}

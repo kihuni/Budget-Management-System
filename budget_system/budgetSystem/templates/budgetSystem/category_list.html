@@ -1,26 +1,17 @@
-{% extends 'budgetSystem/register.html' %}
-{% load static %}
-{% block title %}Category{% endblock %}
-
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/category_list.css' %}">
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>Category list</h1>
-    <ul>
-        <p>Your category list:</p>
-        {% for category in categories %}
-            <li>{{ category.name }}</li>
-        {% empty %}
-            <li>No categories found</li>
-        {% endfor %} 
-
-    </ul>
-
-    <h2>Add New Category</h2>
+<div class="container">
+    <h2>Categories</h2>
     <form method="post">
         {% csrf_token %}
         {{ category_form.as_p }}
-        <button type="submit">Add Category</button>
+        <button type="submit" class="btn btn-primary">Add Category</button>
+    </form>
+    <ul class="list-group">
+        {% for category in categories %}
+        <li class="list-group-item">{{ category.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

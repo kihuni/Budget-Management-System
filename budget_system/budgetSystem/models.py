@@ -24,7 +24,6 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     parent_category = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
     
-    
     def __str__(self):
         return self.name
 
@@ -52,4 +51,3 @@ class Transfer(models.Model):
     from_budget = models.ForeignKey(Budget, related_name='transfers_sent', on_delete=models.CASCADE)
     to_budget = models.ForeignKey(Budget, related_name='transfers_received', on_delete=models.CASCADE)
     notes = models.TextField(null=True, blank=True)
-

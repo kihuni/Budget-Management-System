@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Welcome to the Budget System</h1>
+                    <p class="card-text text-center">This is a simple budget management system.</p>
+                    <p class="card-text text-center">Log in or register to start managing your finances.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="{% url 'login' %}" class="btn btn-primary btn-lg btn-block">Login</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{% url 'user-register' %}" class="btn btn-success btn-lg btn-block">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

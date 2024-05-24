@@ -1,25 +1,17 @@
-
-{% extends 'budgetSystem/register.html' %}
-{% load static %}
-{% block title %}Expenses{% endblock %}
-
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'budgetSystem/expenses_list.css' %}">
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>Expenses list</h1>
-    <ul>
-        {% for expense in expenses %}
-            <li>{{ expense.name }} - {{ expense.amount }} - {{ expense.date }}</li>
-        {% empty %}
-            <li>No expenses found</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Add New Expense</h2>
+<div class="container">
+    <h2>Expenses</h2>
     <form method="post">
         {% csrf_token %}
         {{ expense_form.as_p }}
-        <button type="submit">Add Expense</button>
+        <button type="submit" class="btn btn-primary">Add Expense</button>
+    </form>
+    <ul class="list-group">
+        {% for expense in expenses %}
+        <li class="list-group-item">{{ expense.title }} - {{ expense.amount }}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
